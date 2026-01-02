@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بەشی داخڵبوون</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #2b2b2b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-title {
+            color: #f39c12;
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .logo-container {
+            margin-bottom: 50px;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px dotted #f39c12;
+            padding: 5px;
+            object-fit: cover;
+        }
+
+        .login-box {
+            background: transparent;
+            border: 3px solid #f39c12;
+            border-radius: 15px;
+            padding: 50px 60px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .input-group {
+            margin-bottom: 30px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .input-icon {
+            color: #ccc;
+            font-size: 1.8em;
+        }
+
+        .input-label {
+            color: #ccc;
+            font-size: 1.2em;
+            min-width: 150px;
+            text-align: right;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #666;
+            border-radius: 8px;
+            background: white;
+            font-size: 1.1em;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #3498db;
+        }
+
+        .message {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .message.error {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 2px solid #e74c3c;
+        }
+
+        .message.success {
+            background: rgba(39, 174, 96, 0.2);
+            color: #27ae60;
+            border: 2px solid #27ae60;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.4em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 600px) {
+            .login-title {
+                font-size: 2em;
+            }
+            
+            .login-box {
+                padding: 30px 25px;
+            }
+            
+            .input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .input-label {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="login-title">بەشی داخڵبوون</h1>
+    
+    <div class="logo-container">
+        <img src="logo.png" alt="لۆگۆ" class="logo" id="logo">
+    </div>
+
+    <div class="login-box">
+        <form id="loginForm">
+            <div class="input-group">
+                <span class="input-icon">👤</span>
+                <label class="input-label">ناوی بەکارهێنەر</label>
+                <input type="text" id="username" required autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <span class="input-icon">🔒</span>
+                <label class="input-label">وشەی نهێنی</label>
+                <input type="password" id="password" required autocomplete="off">
+            </div>
+
+            <button type="submit" class="login-btn" id="submitBtn">چوونەژوورەوە</button>
+            
+            <div class="message" id="message"></div>
+        </form>
+    </div>
+
+    <script>
+        // زانیارییەکانی بەکارهێنەران
+        const users = {
+            'admin': 'admin123',
+            'shblood': '123'
+        };
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const messageDiv = document.getElementById('message');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // پاککردنەوەی پەیامی پێشوو
+            messageDiv.style.display = 'none';
+            messageDiv.className = 'message';
+            
+            // پشکنینی زانیاریەکان
+            if(users[username] && users[username] === password) {
+                // چوونەژوورەوە سەرکەوتوو بوو
+                messageDiv.textContent = 'تەواو بە سەرکەوتوویی';
+                messageDiv.classList.add('success');
+                messageDiv.style.display = 'block';
+                submitBtn.disabled = true;
+                
+                // دوای ٣ چرکە بڕۆ بۆ پەیجی سەرەکی
+                setTimeout(function() {
+                    window.location.href = 'index.html';
+                }, 3000);
+                
+            } else {
+                // زانیاریەکان هەڵەیە
+                messageDiv.textContent = 'ناوی بەکارهێنەر یان وشەی نهێنی هەڵەیە';
+                messageDiv.classList.add('error');
+                messageDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

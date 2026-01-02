@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سیستەمی بەڕێوەبردنی دەرمانخانە</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+    <div class="header">
+        <h1>سیستەمی بەڕێوەبردنی دەرمانخانە</h1>
+    </div>
+
+    <div class="dashboard">
+        <div class="card" onclick="openModal('employees')">
+            <div class="card-icon-wrapper">
+                <img src="images/customers.png" alt="کارمەندان" class="card-image">
+            </div>
+            <div class="card-title">بەشی بەڕێوەبردنی کارمەندان</div>
+        </div>
+
+        <div class="card" onclick="openModal('customers')">
+            <div class="card-icon-wrapper">
+                <img src="images/seller-payment.png" alt="کڕیارەکان" class="card-image">
+            </div>
+            <div class="card-title">بەشی کڕیارەکان</div>
+        </div>
+
+        <div class="card" onclick="openModal('debt')">
+            <div class="card-icon-wrapper">
+                <img src="images/debt.png" alt="قەرز" class="card-image">
+            </div>
+            <div class="card-title">بەشی قەرز (فرۆش)</div>
+        </div>
+
+        <div class="card" onclick="openModal('sales')">
+            <div class="card-icon-wrapper">
+                <img src="images/sales.png" alt="فرۆشتن" class="card-image">
+            </div>
+            <div class="card-title">بەشی فرۆشتن</div>
+        </div>
+
+        <div class="card" onclick="openModal('medicines')">
+            <div class="card-icon-wrapper">
+                <img src="images/medicines.png" alt="دەرمانەکان" class="card-image">
+            </div>
+            <div class="card-title">نوێکاری دەرمانەکان</div>
+        </div>
+
+        <div class="card" onclick="openModal('expiry-check')">
+            <div class="card-icon-wrapper">
+                <img src="images/expiry-check.png" alt="پشکنینی بەسەرچوون" class="card-image">
+            </div>
+            <div class="card-title">بەشی ماوەی بەسەرچوون</div>
+        </div>
+
+        <div class="card" onclick="openModal('expired')">
+            <div class="card-icon-wrapper">
+                <img src="images/expired.png" alt="بەسەرچووەکان" class="card-image">
+            </div>
+            <div class="card-title">بەشی بەسەرچوونەکان</div>
+        </div>
+
+        <div class="card" onclick="openModal('companies')">
+            <div class="card-icon-wrapper">
+                <img src="images/companies.png" alt="کۆمپانیاکان" class="card-image">
+            </div>
+            <div class="card-title">بەشی کۆمپانیاکان</div>
+        </div>
+
+        <div class="card" onclick="openModal('seller-payment')">
+            <div class="card-icon-wrapper">
+                <img src="images/Seller's deposit.png" alt="دانەدانی فرۆشیار" class="card-image">
+            </div>
+            <div class="card-title">بەشی دانەدان فرۆشیار</div>
+        </div>
+
+        <div class="card" onclick="openModal('rent-payment')">
+            <div class="card-icon-wrapper">
+                <img src="images/rent-payment.png" alt="دانەدانی کرێ" class="card-image">
+            </div>
+            <div class="card-title">بەشی دانەدان ماوە</div>
+        </div>
+    </div>
+
+    <!-- Modal کارمەندان -->
+    <div id="employees" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>بەڕێوەبردنی کارمەندان</h2>
+                <button class="close-btn" onclick="closeModal('employees')">×</button>
+            </div>
+            <div class="form-group">
+                <label>ناوی کارمەند:</label>
+                <input type="text" id="emp-name" placeholder="ناو بنووسە">
+            </div>
+            <div class="form-group">
+                <label>پۆست:</label>
+                <input type="text" id="emp-position" placeholder="پۆست">
+            </div>
+            <div class="form-group">
+                <label>مووچە:</label>
+                <input type="number" id="emp-salary" placeholder="مووچە">
+            </div>
+            <div class="form-group">
+                <label>ژمارەی مۆبایل:</label>
+                <input type="tel" id="emp-phone" placeholder="ژمارەی مۆبایل">
+            </div>
+            <button class="btn btn-success" onclick="addEmployee()">زیادکردن</button>
+            <div id="emp-table"></div>
+        </div>
+    </div>
+
+    <!-- Modal کڕیارەکان -->
+    <div id="customers" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>بەڕێوەبردنی کڕیارەکان</h2>
+                <button class="close-btn" onclick="closeModal('customers')">×</button>
+            </div>
+            <div class="form-group">
+                <label>ناوی کڕیار:</label>
+                <input type="text" id="cust-name" placeholder="ناو بنووسە">
+            </div>
+            <div class="form-group">
+                <label>ژمارەی مۆبایل:</label>
+                <input type="tel" id="cust-phone" placeholder="ژمارەی مۆبایل">
+            </div>
+            <div class="form-group">
+                <label>ناونیشان:</label>
+                <textarea id="cust-address" placeholder="ناونیشان"></textarea>
+            </div>
+            <button class="btn btn-success" onclick="addCustomer()">زیادکردن</button>
+            <div id="cust-table"></div>
+        </div>
+    </div>
+
+    <!-- Modal قەرز -->
+    <div id="debt" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>بەڕێوەبردنی قەرز</h2>
+                <button class="close-btn" onclick="closeModal('debt')">×</button>
+            </div>
+            <div class="form-group">
+                <label>ناوی کڕیار:</label>
+                <input type="text" id="debt-customer" placeholder="ناوی کڕیار">
+            </div>
+            <div class="form-group">
+                <label>بڕی قەرز:</label>
+                <input type="number" id="debt-amount" placeholder="بڕ">
+            </div>
+            <div class="form-group">
+                <label>بەروار:</label>
+                <input type="date" id="debt-date">
+            </div>
+            <button class="btn btn-success" onclick="addDebt()">زیادکردن</button>
+            <div id="debt-table"></div>
+        </div>
+    </div>
+
+    <!-- Modal فرۆشتن -->
+    <div id="sales" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>بەڕێوەبردنی فرۆشتن</h2>
+                <button class="close-btn" onclick="closeModal('sales')">×</button>
+            </div>
+            <div class="form-group">
+                <label>ناوی دەرمان:</label>
+                <input type="text" id="sale-medicine" placeholder="ناوی دەرمان">
+            </div>
+            <div class="form-group">
+                <label>ژمارە:</label>
+                <input type="number" id="sale-quantity" placeholder="ژمارە">
+            </div>
+            <div class="form-group">
+                <label>نرخ:</label>
+                <input type="number" id="sale-price" placeholder="نرخ">
+            </div>
+            <div class="form-group">
+                <label>بەروار:</label>
+                <input type="date" id="sale-date">
+            </div>
+            <button class="btn btn-success" onclick="addSale()">زیادکردن</button>
+            <div id="sales-table"></div>
+        </div>
+    </div>
+
+    <!-- Modal دەرمانەکان -->
+    <div id="medicines" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>نوێکاری دەرمانەکان</h2>
+                <button class="close-btn" onclick="closeModal('medicines')">×</button>
+            </div>
+            <div class="form-group">
+                <label>ناوی دەرمان:</label>
+                <input type="text" id="med-name" placeholder="ناوی دەرمان">
+            </div>
+            <div class="form-group">
+                <label>کۆمپانیا:</label>
+                <input type="text" id="med-company" placeholder="کۆمپانیا">
+            </div>
+            <div class="form-group">
+                <label>ژمارە:</label>
+                <input type="number" id="med-quantity" placeholder="ژمارە">
+            </div>
+            <div class="form-group">
+                <label>نرخی کڕین:</label>
+                <input type="number" id="med-buy-price" placeholder="نرخی کڕین">
+            </div>
+            <div class="form-group">
+                <label>نرخی فرۆشتن:</label>
+                <input type="number" id="med-sell-price" placeholder="نرخی فرۆشتن">
+            </div>
+            <div class="form-group">
+                <label>بەرواری بەسەرچوون:</label>
+                <input type="date" id="med-expiry">
+            </div>
+            <button class="btn btn-success" onclick="addMedicine()">زیادکردن</button>
+            <div id="med-table"></div>
+        </div>
+    </div>
+
+    <!-- Modal پشکنینی بەسەرچوون -->
+    <div id="expiry-check" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>پشکنینی ماوەی بەسەرچوون</h2>
+                <button class="close-btn" onclick="closeModal('expiry-check')">×</button>
+            </div>
+            <p style="color: #ecf0f1; margin-bottom: 20px;">دەرمانەکان کە نزیکە بەسەربچن (کەمتر لە ٣ مانگ)</p>
+            <div id="expiry-check-table"></div>
+        </div>
+    </div>
+
+    <!-- Modal بەسەرچووەکان -->
+    <div id="expired" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>دەرمانە بەسەرچووەکان</h2>
+                <button class="close-btn" onclick="closeModal('expired')">×</button>
+            </div>
+            <div id="expired-table"></div>
+        </div>
+    </div>
+
+    <!-- Modal کۆمپانیاکان -->
+    <div id="companies" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>بەڕێوەبردنی کۆمپانیاکان</h2>
+                <button class="close-btn" onclick="closeModal('companies')">×</button>
+            </div>
+            <div class="form-group">
+                <label>ناوی کۆمپانیا:</label>
+                <input type="text" id="comp-name" placeholder="ناوی کۆمپانیا">
+            </div>
+            <div class="form-group">
+                <label>ژمارەی پەیوەندی:</label>
+                <input type="tel" id="comp-phone" placeholder="ژمارەی پەیوەندی">
+            </div>
+            <div class="form-group">
+                <label>ناونیشان:</label>
+                <textarea id="comp-address" placeholder="ناونیشان"></textarea>
+            </div>
+            <button class="btn btn-success" onclick="addCompany()">زیادکردن</button>
+            <div id="comp-table"></div>
+        </div>
+    </div>
+
+    <!-- Modal دانەدانی فرۆشیار -->
+    <div id="seller-payment" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>دانەدانی فرۆشیار</h2>
+                <button class="close-btn" onclick="closeModal('seller-payment')">×</button>
+            </div>
+            <div class="form-group">
+                <label>ناوی فرۆشیار:</label>
+                <input type="text" id="seller-name" placeholder="ناوی فرۆشیار">
+            </div>
+            <div class="form-group">
+                <label>بڕی پارە:</label>
+                <input type="number" id="seller-amount" placeholder="بڕ">
+            </div>
+            <div class="form-group">
+                <label>بەروار:</label>
+                <input type="date" id="seller-date">
+            </div>
+            <button class="btn btn-success" onclick="addSellerPayment()">زیادکردن</button>
+            <div id="seller-table"></div>
+        </div>
+    </div>
+
+    <!-- Modal دانەدانی کرێ -->
+    <div id="rent-payment" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>دانەدانی کرێ</h2>
+                <button class="close-btn" onclick="closeModal('rent-payment')">×</button>
+            </div>
+            <div class="form-group">
+                <label>بڕی کرێ:</label>
+                <input type="number" id="rent-amount" placeholder="بڕ">
+            </div>
+            <div class="form-group">
+                <label>مانگ:</label>
+                <input type="month" id="rent-month">
+            </div>
+            <div class="form-group">
+                <label>تێبینی:</label>
+                <textarea id="rent-note" placeholder="تێبینی"></textarea>
+            </div>
+            <button class="btn btn-success" onclick="addRentPayment()">زیادکردن</button>
+            <div id="rent-table"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
